@@ -36,7 +36,7 @@ pipeline {
                 sh 'pwd;cd terraform/aws-instance-first-script ; terraform init -input=false'
                 sh 'pwd;cd terraform/aws-instance-first-script ; terraform workspace new ${environment}'
                 sh 'pwd;cd terraform/aws-instance-first-script ; terraform workspace select ${environment}'
-                sh "pwd;cd terraform/aws-instance-first-script ;terraform plan -input=false -out tfplan  -var region=${USER_KEYPEM}"
+                sh "pwd;cd terraform/aws-instance-first-script ;terraform plan -input=false -out tfplan  -var myKeypem=${USER_KEYPEM}"
                 sh 'pwd;cd terraform/aws-instance-first-script ;terraform show -no-color tfplan > tfplan.txt'
             }
         }

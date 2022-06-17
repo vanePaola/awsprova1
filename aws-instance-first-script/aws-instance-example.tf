@@ -23,7 +23,7 @@ resource "aws_instance" "web1" {
 
     connection {
     user        = "ec2-user"
-    private_key = "${keypem}"
+    private_key = "${myKeypem}"
     host = "${aws_instance.web1.public_ip}"
   }
 
