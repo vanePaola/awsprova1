@@ -11,3 +11,5 @@ variable "ami_id" {
     eu-south-1   = "ami-d12741a2"
   }
 }
+
+variable "myKeypem" {}
