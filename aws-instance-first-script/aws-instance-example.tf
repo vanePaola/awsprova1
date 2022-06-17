@@ -6,4 +6,12 @@ resource "aws_instance" "web1" {
     tags = {
     Name = "myFirstWebServer"
   }
+    provisioner "file" {
+    source      = "web/index.html"
+    destination = "/opt/index.html"
+  }
+    provisioner "file" {
+    source      = "web/iei.jpg"
+    destination = "/opt/iei.jpg"
+  }
  }
