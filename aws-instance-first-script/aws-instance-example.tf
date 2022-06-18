@@ -14,7 +14,7 @@ resource "null_resource" "terraform-debug" {
 resource "aws_instance" "web1" {
    ami           = "${lookup(var.ami_id, var.region)}"
    instance_type = "t2.micro"
-   vpc_security_group_ids = ["sg-0595c8458d4d78fe9"]
+   vpc_security_group_ids = ["${aws_security_group.webSG.id}"]
    key_name = "myKeyPair"
    
 
@@ -63,4 +63,32 @@ resource "aws_instance" "web1" {
     timeout = "3m"
   }
 
+depends_on = [ aws_instance.web1 ]
  }
+
+ resource "aws_security_group" "webSG" {
+  name        = "webSG"
+  description = "Allow ssh  inbound traffic"
+
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port   = 8080
+    to_port     = 8080
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port       = 0
+    to_port         = 0
+    protocol        = "-1"
+    cidr_blocks     = ["0.0.0.0/0"]
+    
+  }
+}
