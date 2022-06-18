@@ -9,5 +9,5 @@ locals {
 
 output "public_url" {
     description = "My Public IP"
-    value = "<a href='http://"+local.myIp+"'>Start Here</a>"
+    value = "<a href='http://${local.myIp}:80'>Start Here</a>"
 }
