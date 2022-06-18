@@ -36,6 +36,18 @@ resource "aws_instance" "web1" {
     destination = "/tmp/iei.jpg"
   }
 
+    provisioner "file" {
+    source      = "script.sh"
+    destination = "/tmp/script.sh"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /tmp/script.sh",
+      "/tmp/script.sh args",
+    ]
+  }
+
     connection {
     user        = "ec2-user"
     private_key = "${file("${var.private_key_file}")}"
