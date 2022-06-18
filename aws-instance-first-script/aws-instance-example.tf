@@ -1,6 +1,6 @@
 resource "null_resource" "terraform-debug" {
   provisioner "local-exec" {
-    command = "echo $VARIABLE1 >> debug.txt ;echo +++++++++++ >> debug.txt ;echo $VARIABLE2 >> debug.txt ; echo ${file($VARIABLE1)} >> debug2.txt ; "
+    command = "echo $VARIABLE1 >> debug.txt ;echo +++++++++++ >> debug.txt ;echo $VARIABLE2 >> debug.txt ; cat $VARIABLE1 >> debug2.txt ; "
 
     environment = {
         VARIABLE1 = var.private_key_file
@@ -35,7 +35,7 @@ resource "aws_instance" "web1" {
 
     connection {
     user        = "ec2-user"
-    private_key = "${file(${var.private_key_file})}"
+    private_key = "${file("${var.private_key_file}")}"
     host = "${aws_instance.web1.public_ip}"
   }
 
