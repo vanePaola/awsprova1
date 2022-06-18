@@ -27,6 +27,16 @@ resource "aws_instance" "web1" {
  #   ]
  # }
 
+  provisioner "remote-exec" {
+          # Leave this here so we know when to start with Ansible local-exec
+    inline = [ "echo 'Cool, we are ready for provisioning'"]
+  }
+
+    provisioner "file" {
+    source      = "script.sh"
+    destination = "/tmp/script.sh"
+  }
+
     provisioner "file" {
     source      = "web/index.html"
     destination = "/tmp/index.html"
@@ -36,10 +46,7 @@ resource "aws_instance" "web1" {
     destination = "/tmp/iei.jpg"
   }
 
-    provisioner "file" {
-    source      = "script.sh"
-    destination = "/tmp/script.sh"
-  }
+
 
   provisioner "remote-exec" {
     inline = [
@@ -52,6 +59,8 @@ resource "aws_instance" "web1" {
     user        = "ec2-user"
     private_key = "${file("${var.private_key_file}")}"
     host = "${aws_instance.web1.public_ip}"
+    agent = false
+    timeout = "3m"
   }
 
  }
