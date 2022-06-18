@@ -3,7 +3,11 @@ output "public_ip" {
     value = try(aws_instance.web1.public_ip,"")
 }
 
+locals {
+  myIp = try(aws_instance.web1.public_ip,"")
+}
+
 output "public_url" {
     description = "My Public IP"
-    value = "<a href='http://"+local.public_ip+"'>Start Here</a>"
+    value = "<a href='http://"+local.myIp+"'>Start Here</a>"
 }
