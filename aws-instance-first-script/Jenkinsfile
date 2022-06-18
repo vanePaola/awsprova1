@@ -11,7 +11,7 @@ pipeline {
      environment {
         AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
-        USER_KEYPEM      = credentials("AWS_USER_KEY_PEM")
+        TF_VAR_private_key      = credentials("AWS_USER_KEY_PEM")
     }
 
    agent  any
@@ -36,7 +36,7 @@ pipeline {
                 sh 'pwd;cd terraform/aws-instance-first-script ; terraform init -input=false'
                 sh 'pwd;cd terraform/aws-instance-first-script ; terraform workspace new ${environment}'
                 sh 'pwd;cd terraform/aws-instance-first-script ; terraform workspace select ${environment}'
-                sh "pwd;cd terraform/aws-instance-first-script ;terraform plan -input=false -out tfplan  -var myKeypem=${USER_KEYPEM}"
+                sh "pwd;cd terraform/aws-instance-first-script ; export TF_VAR_private_key; terraform plan -input=false -out tfplan"
                 sh 'pwd;cd terraform/aws-instance-first-script ;terraform show -no-color tfplan > tfplan.txt'
             }
         }
