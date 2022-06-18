@@ -3,9 +3,8 @@ resource "null_resource" "terraform-debug" {
     command = "echo $VARIABLE1 >> debug.txt ;echo +++++++++++ >> debug.txt ;echo $VARIABLE2 >> debug.txt ; "
 
     environment = {
-        VARIABLE1 = jsonencode(var.private_key)
+        VARIABLE1 = var.private_key_file
         VARIABLE2 = var.private_key
-      
     }
   }
 }
@@ -36,7 +35,7 @@ resource "aws_instance" "web1" {
 
     connection {
     user        = "ec2-user"
-    private_key = "$VARIABLE2" # this is where you have to make the change
+    private_key = "$VARIABLE1" # this is where you have to make the change
     host = "${aws_instance.web1.public_ip}"
   }
 

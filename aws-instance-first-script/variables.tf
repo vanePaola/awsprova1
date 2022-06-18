@@ -16,3 +16,8 @@ variable "private_key" {
   type = string
   description = "SSH private key for accessing the EC2 instance."
 }
+
+variable "private_key_file" {
+  type = string
+  description = "SSH private key for accessing the EC2 instance."
+}
