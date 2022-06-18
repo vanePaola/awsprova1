@@ -20,11 +20,6 @@ resource "aws_instance" "web1" {
     tags = {
     Name = "myFirstWebServer"
   }
-   environment = {
-        VARIABLE3 = jsonencode(var.private_key)
-        
-      
-    }
     provisioner "remote-exec" {
     inline = [
       "cloud-init status --wait"
@@ -41,7 +36,7 @@ resource "aws_instance" "web1" {
 
     connection {
     user        = "ec2-user"
-    private_key = "$VARIABLE3" # this is where you have to make the change
+    private_key = "$VARIABLE2" # this is where you have to make the change
     host = "${aws_instance.web1.public_ip}"
   }
 
