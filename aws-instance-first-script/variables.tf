@@ -6,9 +6,9 @@ variable "ami_id" {
   type = map
 
   default = {
-    eu-west-1    = "ami-d12741a2"
-    eu-west-2    = "ami-d12741a2"
-    eu-south-1   = "ami-d12741a2"
+    eu-west-1    = "ami-0d71ea30463e0ff8d"
+    eu-west-2    = "ami-0d71ea30463e0ff8d"
+    eu-south-1   = "ami-0d71ea30463e0ff8d"
   }
 }
 
