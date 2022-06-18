@@ -21,18 +21,19 @@ resource "aws_instance" "web1" {
     tags = {
     Name = "myFirstWebServer"
   }
-    provisioner "remote-exec" {
-    inline = [
-      "cloud-init status --wait"
-    ]
-  }
+ #   provisioner "remote-exec" {
+ #   inline = [
+ #     "cloud-init status --wait"
+ #   ]
+ # }
+
     provisioner "file" {
     source      = "web/index.html"
-    destination = "/opt/index.html"
+    destination = "/tmp/index.html"
   }
     provisioner "file" {
     source      = "web/iei.jpg"
-    destination = "/opt/iei.jpg"
+    destination = "/tmp/iei.jpg"
   }
 
     connection {
