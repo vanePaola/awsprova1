@@ -2,7 +2,6 @@
 - name: Install Apache Tomcat10 using ansible
   hosts: "{{ serverPublicIP }}"
   remote_user: ec2-user
-  ansible_user: ec2-user 
   become: true
   tasks:
  
