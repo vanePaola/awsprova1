@@ -1,6 +1,6 @@
 ---
 - name: Install Apache Tomcat10 using ansible
-  hosts: webservers
+  hosts: [serverPublicIP]
   remote_user: ec2-user
   become: true
   tasks:
@@ -46,7 +46,7 @@
     - name: Copy Tomcat service from local to remote
       copy:
         src: tomcat.service
-        dest: /etc/systemd/system/
+        dest: /etc/systemd/system/tomcat.service
         mode: 0755
  
     - name: Start and Enable Tomcat 10 on sever
