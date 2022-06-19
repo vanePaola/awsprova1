@@ -4,9 +4,6 @@
   remote_user: ec2-user
   become: true
   tasks:
-    - name: Update the System Packages
-      yum:
-        update_cache: yes
  
     - name: Create a Tomcat User
       user:
@@ -17,11 +14,10 @@
         name: tomcat
  
     - name: Install JAVA
-      yum:
-        action: ExecuteBash
-        inputs: 
-          commands:
-            - sudo amazon-linux-extras install -y java-openjdk11
+      command: "sudo amazon-linux-extras install -y java-openjdk11"
+        
+    - name: test JAVA
+      command: "java -version"
   
     - name: Create a Tomcat Directory
       file:
