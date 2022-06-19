@@ -18,8 +18,10 @@
  
     - name: Install JAVA
       yum:
-        name: default-jdk
-        state: present
+        action: ExecuteBash
+        inputs: 
+          commands:
+            - sudo amazon-linux-extras install -y java-openjdk11
   
     - name: Create a Tomcat Directory
       file:
