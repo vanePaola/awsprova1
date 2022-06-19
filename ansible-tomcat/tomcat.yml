@@ -5,7 +5,7 @@
   become: true
   tasks:
     - name: Update the System Packages
-      apt:
+      yum:
         upgrade: yes
         update_cache: yes
  
@@ -18,7 +18,7 @@
         name: tomcat
  
     - name: Install JAVA
-      apt:
+      yum:
         name: default-jdk
         state: present
   
