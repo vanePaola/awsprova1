@@ -1,2 +1,4 @@
 [webservers]
-3.250.226.131 ansible_user=ec2-user 
+{{ serverPublicIP }} ansible_user=ec2-user 
+
+
