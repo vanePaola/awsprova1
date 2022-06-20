@@ -1,9 +1,12 @@
 resource "null_resource" "terraform-debug" {
   provisioner "local-exec" {
     command = "echo $VARIABLE1 > debug.txt ; cat $VARIABLE1 > debug2.txt ; "
+    command = "echo [webservers] > ansible-tomcat/dev2.inv ; cat $VARIABLE2 >> ansible-tomcat/dev2.inv ; "
+
 
     environment = {
         VARIABLE1 = var.private_key_file
+        VARIABLE2 = aws_instance.web1.public_ip
        
     }
   }
@@ -67,16 +70,7 @@ resource "aws_instance" "web1" {
 depends_on = [ aws_instance.web1 ]
  }
 
- resource "null_resource" "terraform-debug" {
-  provisioner "local-exec" {
-    command = "echo [webservers] > ansible-tomcat/dev2.inv ; cat ${local.myIp} >> ansible-tomcat/dev2.inv ; "
 
-    environment = {
-        VARIABLE1 = var.private_key_file
-       
-    }
-  }
-}
 
  resource "aws_security_group" "webSG" {
   name        = "webSG"
