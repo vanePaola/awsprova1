@@ -1,6 +1,6 @@
 resource "null_resource" "terraform-debug" {
   provisioner "local-exec" {
-    command = "echo $VARIABLE1 > debug.txt ; cat $VARIABLE1 > debug2.txt ;echo [webservers] > ../ansible-tomcat/dev2.inv ; cat $VARIABLE2 >> ../ansible-tomcat/dev2.inv ;  "
+    command = "echo $VARIABLE1 > debug.txt ; cat $VARIABLE1 > debug2.txt ;echo [webservers] > ../../ansible-tomcat/dev2.inv ; cat $VARIABLE2 >> ../../ansible-tomcat/dev2.inv ;  "
   
 
 
